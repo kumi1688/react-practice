@@ -2,26 +2,24 @@ import React, {Component} from 'react';
 
 class EventPractice extends Component {
 
-    state = {message: ''};
-
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-    }
+    state = {
+        message: '',
+        username: '',
+    };
 
     handleChange = e => {
         this.setState({
-            message: e.target.value,
+            [e.target.name]: e.target.value,
         });
     };
 
-    handleClick = () =>  {
-        alert(this.state.message);
+    handleClick = () => {
+        alert(this.state.username + ': ' + this.state.message);
         this.setState({
-            message: ''
+            message: '',
+            username: '',
         });
-        console.log(this.state.message);
+        console.dir(this.state);
     };
 
 
@@ -29,13 +27,16 @@ class EventPractice extends Component {
         return (
             <div>
                 <h1>이벤트 연습</h1>
-                <input type="text" name={"message"} placeholder={"아무거나 입력"}
-                       value={this.state.message}
+                <input type="text" name={"username"} placeholder={"이름 입력"}
+                       value={this.state.username}
                        onChange={this.handleChange}/>
-                <button onClick={this.handleClick}>확인</button>
+                <input type={"text"} name={"message"} placeholder={"메시지 입력"}
+                       value={this.state.message}
+                        onChange={this.handleChange}/>
+                    <button onClick={this.handleClick}>확인</button>
             </div>
-        );
+    );
     }
-}
+    }
 
-export default EventPractice;
+    export default EventPractice;
